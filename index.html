@@ -10,9 +10,7 @@
 :root{
   --bg:#090202;
   --panel:rgba(29,6,4,.48);
-  --panel-2:rgba(15,3,2,.34);
   --line:rgba(203,69,31,.48);
-  --line-soft:rgba(242,157,65,.18);
   --red:#ff4a22;
   --ember:#ff7a32;
   --gold:#e2b15c;
@@ -56,7 +54,7 @@ body{
   overflow-x:hidden;
 }
 
-/* Subtle background texture */
+/* BACKGROUND TEXTURE */
 body::before{
   content:"";
   position:fixed;
@@ -75,7 +73,7 @@ body::before{
   opacity:.35;
 }
 
-/* EMBER CANVAS */
+/* EMBERS */
 #embers{
   position:fixed;
   inset:0;
@@ -83,13 +81,11 @@ body::before{
   height:100%;
   pointer-events:none;
   z-index:1;
-
   opacity:.95;
   mix-blend-mode:screen;
 }
 
-/* MAIN WRAPPER
-   No giant outer border */
+/* MAIN WRAPPER - NO OUTER BORDER */
 .shell{
   position:relative;
   z-index:2;
@@ -99,21 +95,16 @@ body::before{
 
   background:transparent;
   border:0;
-  border-radius:0;
   box-shadow:none;
-
   overflow:visible;
 }
 
 /* HERO */
 .hero{
   position:relative;
-
   padding:24px 16px 10px;
-
   background:transparent;
   border:0;
-
   text-align:center;
 }
 
@@ -132,10 +123,8 @@ body::before{
 
 .hero-frame img{
   display:block;
-
   width:100%;
   height:auto;
-
   object-fit:contain;
 
   filter:
@@ -145,26 +134,21 @@ body::before{
 
 .hero-overlay{
   position:relative;
-
   padding:10px 12px 0;
-
   background:transparent;
   text-align:center;
 }
 
 .kicker{
   color:var(--gold-soft);
-
   text-transform:uppercase;
   letter-spacing:.28em;
-
   font-size:.76rem;
   font-weight:700;
 }
 
 .hero-title{
   margin:7px 0 6px;
-
   color:var(--red);
 
   font-size:clamp(2rem,7vw,4.5rem);
@@ -177,9 +161,7 @@ body::before{
 
 .hero-sub{
   margin:0;
-
   color:#f6d68f;
-
   font-style:italic;
   font-size:clamp(.95rem,2.2vw,1.2rem);
 }
@@ -195,14 +177,13 @@ body::before{
     34px;
 }
 
-/* DESCRIPTION BOARD */
+/* DESCRIPTION */
 .intro{
   position:relative;
 
   max-width:800px;
-
   margin:0 auto 30px;
-  padding:24px 24px;
+  padding:24px;
 
   border:1px solid rgba(255,83,35,.32);
   border-left:4px solid var(--red);
@@ -232,28 +213,23 @@ body::before{
   color:#f1dfcc;
 
   animation:
-    boardFloatA 6.4s
+    boardFloatA
+    6.4s
     ease-in-out
     infinite;
 }
 
-/* THREE BOARDS */
+/* CARDS */
 .cards{
   display:grid;
-
-  grid-template-columns:
-    repeat(3,1fr);
-
+  grid-template-columns:repeat(3,1fr);
   gap:16px;
-
   margin-top:20px;
 }
 
 .card{
   position:relative;
-
   min-height:180px;
-
   padding:22px;
 
   border:1px solid rgba(207,78,34,.32);
@@ -287,14 +263,16 @@ body::before{
 
 .card:nth-child(1){
   animation:
-    boardFloatB 6.8s
+    boardFloatB
+    6.8s
     ease-in-out
     infinite;
 }
 
 .card:nth-child(2){
   animation:
-    boardFloatA 7.4s
+    boardFloatA
+    7.4s
     ease-in-out
     .45s
     infinite;
@@ -302,15 +280,15 @@ body::before{
 
 .card:nth-child(3){
   animation:
-    boardFloatB 6.6s
+    boardFloatB
+    6.6s
     ease-in-out
     .8s
     infinite;
 }
 
 .card:hover{
-  border-color:
-    rgba(255,128,63,.58);
+  border-color:rgba(255,128,63,.58);
 
   box-shadow:
     0 26px 56px rgba(0,0,0,.44),
@@ -320,45 +298,33 @@ body::before{
 
 .card h3{
   margin:0 0 10px;
-
   color:#ff6533;
-
   font-size:1.02rem;
 }
 
 .card p{
   margin:0;
-
   color:#ddc8b5;
-
   line-height:1.65;
   font-size:.95rem;
 }
 
-/* QUOTE BOARD */
+/* QUOTE */
 .quote{
   position:relative;
 
   margin:34px auto 8px;
-
   max-width:760px;
-
   padding:24px;
 
   text-align:center;
-
   color:#f3ce7d;
 
-  font-size:
-    clamp(1rem,2.5vw,1.24rem);
-
+  font-size:clamp(1rem,2.5vw,1.24rem);
   line-height:1.6;
   font-style:italic;
 
-  border:
-    1px solid
-    rgba(213,82,37,.30);
-
+  border:1px solid rgba(213,82,37,.30);
   border-radius:18px;
 
   background:
@@ -382,18 +348,82 @@ body::before{
     inset 0 1px 0 rgba(255,255,255,.05);
 
   animation:
-    boardFloatA 7.2s
+    boardFloatA
+    7.2s
     ease-in-out
     .25s
     infinite;
 }
 
-/* GIF SECTION */
+/* BLOG BUTTON */
+.blog-button-wrap{
+  margin:34px auto 14px;
+  text-align:center;
+}
+
+.blog-button{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:10px;
+
+  padding:15px 30px;
+
+  color:#fff4df;
+
+  background:
+    linear-gradient(
+      135deg,
+      #8c1709,
+      #e43c16 48%,
+      #a31e0c
+    );
+
+  border:1px solid rgba(255,158,82,.72);
+  border-radius:14px;
+
+  font-family:Georgia,"Times New Roman",serif;
+  font-size:.95rem;
+  font-weight:700;
+
+  letter-spacing:.09em;
+  text-transform:uppercase;
+  text-decoration:none;
+
+  box-shadow:
+    0 14px 34px rgba(0,0,0,.40),
+    0 0 24px rgba(255,55,20,.18),
+    inset 0 1px 0 rgba(255,255,255,.18);
+
+  transition:
+    transform .25s ease,
+    box-shadow .25s ease,
+    border-color .25s ease;
+}
+
+.blog-button:hover{
+  transform:
+    translateY(-4px)
+    scale(1.025);
+
+  border-color:#ffc070;
+
+  box-shadow:
+    0 19px 40px rgba(0,0,0,.45),
+    0 0 34px rgba(255,62,20,.32),
+    inset 0 1px 0 rgba(255,255,255,.22);
+}
+
+.blog-button:active{
+  transform:
+    translateY(0)
+    scale(.98);
+}
+
+/* GIF */
 .gif-section{
   margin-top:40px;
-
   padding-top:20px;
-
   text-align:center;
 }
 
@@ -404,7 +434,6 @@ body::before{
 
   font-size:.82rem;
   letter-spacing:.20em;
-
   text-transform:uppercase;
 }
 
@@ -412,14 +441,10 @@ body::before{
   position:relative;
 
   width:min(520px,100%);
-
   margin:0 auto;
   padding:12px;
 
-  border:
-    1px solid
-    rgba(255,101,44,.38);
-
+  border:1px solid rgba(255,101,44,.38);
   border-radius:24px;
 
   background:
@@ -443,7 +468,8 @@ body::before{
     inset 0 1px 0 rgba(255,255,255,.06);
 
   animation:
-    boardFloatB 6.9s
+    boardFloatB
+    6.9s
     ease-in-out
     .6s
     infinite;
@@ -451,10 +477,8 @@ body::before{
 
 .gif-glass img{
   display:block;
-
   width:100%;
   height:auto;
-
   border-radius:17px;
 }
 
@@ -463,49 +487,41 @@ body::before{
   padding:20px 22px 28px;
 
   text-align:center;
-
   color:#9f6f54;
 
   font-size:.78rem;
   letter-spacing:.13em;
-
   text-transform:uppercase;
 }
 
-/* FLOATING MOTION */
+/* ANIMATIONS */
 @keyframes heroFloat{
   0%,100%{
-    transform:
-      translateY(0);
+    transform:translateY(0);
   }
 
   50%{
-    transform:
-      translateY(-8px);
+    transform:translateY(-8px);
   }
 }
 
 @keyframes boardFloatA{
   0%,100%{
-    transform:
-      translateY(0);
+    transform:translateY(0);
   }
 
   50%{
-    transform:
-      translateY(-7px);
+    transform:translateY(-7px);
   }
 }
 
 @keyframes boardFloatB{
   0%,100%{
-    transform:
-      translateY(2px);
+    transform:translateY(2px);
   }
 
   50%{
-    transform:
-      translateY(-5px);
+    transform:translateY(-5px);
   }
 }
 
@@ -513,45 +529,39 @@ body::before{
 @media(max-width:720px){
 
   .shell{
-    width:
-      min(
-        calc(100% - 12px),
-        980px
-      );
+    width:min(
+      calc(100% - 12px),
+      980px
+    );
 
     margin:6px auto;
   }
 
   .hero{
-    padding:
-      12px 8px 6px;
+    padding:12px 8px 6px;
   }
 
   .hero-frame{
-    width:
-      min(
-        300px,
-        82vw
-      );
+    width:min(
+      300px,
+      82vw
+    );
   }
 
   .hero-overlay{
-    padding:
-      10px 10px 0;
+    padding:10px 10px 0;
   }
 
   .hero-title{
-    font-size:
-      clamp(
-        2rem,
-        13vw,
-        3.6rem
-      );
+    font-size:clamp(
+      2rem,
+      13vw,
+      3.6rem
+    );
   }
 
   .cards{
     grid-template-columns:1fr;
-
     gap:18px;
   }
 
@@ -566,6 +576,11 @@ body::before{
 
   .gif-glass{
     width:min(94vw,500px);
+  }
+
+  .blog-button{
+    width:min(90%,340px);
+    padding:14px 20px;
   }
 }
 
@@ -600,9 +615,11 @@ body::before{
   <section class="hero">
 
     <div class="hero-frame">
+
       <img
         src="devils-corner-hero.png"
         alt="Devil's Corner">
+
     </div>
 
     <div class="hero-overlay">
@@ -616,8 +633,7 @@ body::before{
       </h1>
 
       <p class="hero-sub">
-        Where strategy, story,
-        and the human game meet.
+        Where strategy, story, and the human game meet.
       </p>
 
     </div>
@@ -627,12 +643,10 @@ body::before{
   <!-- MAIN CONTENT -->
   <section class="content">
 
+    <!-- DESCRIPTION -->
     <div class="intro">
 
-      <strong
-        style="
-          color:#ff7a3a;
-        ">
+      <strong style="color:#ff7a3a;">
         🔥 Welcome to Devil's Corner.
       </strong>
 
@@ -673,10 +687,7 @@ body::before{
 
       <br><br>
 
-      <strong
-        style="
-          color:#f4d28a;
-        ">
+      <strong style="color:#f4d28a;">
         Chess is the board.
         Ideas are the battleground.
       </strong>
@@ -737,13 +748,26 @@ body::before{
     <!-- QUOTE -->
     <div class="quote">
 
-      “The board gives us
-      sixty-four squares.
+      “The board gives us sixty-four squares.
 
       <br>
 
-      The ideas behind them
-      are limitless.”
+      The ideas behind them are limitless.”
+
+    </div>
+
+    <!-- BLOG BUTTON -->
+    <div class="blog-button-wrap">
+
+      <a
+        class="blog-button"
+        href="https://www.chess.com/blog/Devils-Corner"
+        target="_blank"
+        rel="noopener noreferrer">
+
+        🔥 Enter Devil's Corner
+
+      </a>
 
     </div>
 
@@ -826,52 +850,35 @@ body::before{
       0,
       0
     );
-
   }
 
-  function createEmber(
-    reset = false
-  ){
+  function createEmber(reset = false){
 
-    return {
+    return{
 
       x:
-        Math.random()
-        * width,
+        Math.random() * width,
 
       y:
         reset
-        ? height
-          + Math.random() * 100
-        : Math.random()
-          * height,
+        ? height + Math.random() * 100
+        : Math.random() * height,
 
       radius:
-        .7
-        + Math.random()
-        * 2.6,
+        .7 + Math.random() * 2.6,
 
       speed:
-        .35
-        + Math.random()
-        * 1.05,
+        .35 + Math.random() * 1.05,
 
       drift:
-        (Math.random() - .5)
-        * .34,
+        (Math.random() - .5) * .34,
 
       alpha:
-        .28
-        + Math.random()
-        * .70,
+        .28 + Math.random() * .70,
 
       flicker:
-        Math.random()
-        * Math.PI
-        * 2
-
+        Math.random() * Math.PI * 2
     };
-
   }
 
   function seed(){
@@ -881,21 +888,15 @@ body::before{
         115,
         Math.max(
           55,
-          Math.floor(
-            width / 12
-          )
+          Math.floor(width / 12)
         )
       );
 
     embers =
       Array.from(
-        {
-          length:total
-        },
-        () =>
-          createEmber(false)
+        {length:total},
+        () => createEmber(false)
       );
-
   }
 
   function animate(time){
@@ -929,16 +930,12 @@ body::before{
         Math.sin(
           time * .0015
           + ember.flicker
-        )
-        * .13;
+        ) * .13;
 
       if(
-        ember.y < -30
-        ||
-        ember.x < -30
-        ||
-        ember.x >
-        width + 30
+        ember.y < -30 ||
+        ember.x < -30 ||
+        ember.x > width + 30
       ){
 
         embers[i] =
@@ -946,7 +943,6 @@ body::before{
             ember,
             createEmber(true)
           );
-
       }
 
       const flick =
@@ -960,8 +956,7 @@ body::before{
         );
 
       const opacity =
-        ember.alpha
-        * flick;
+        ember.alpha * flick;
 
       const glow =
         ctx.createRadialGradient(
@@ -973,9 +968,7 @@ body::before{
           ember.x,
           ember.y,
 
-          ember.radius
-          * 4.5
-
+          ember.radius * 4.5
         );
 
       glow.addColorStop(
@@ -1021,27 +1014,26 @@ body::before{
       ctx.arc(
         ember.x,
         ember.y,
-        ember.radius
-        * 4.5,
+        ember.radius * 4.5,
         0,
         Math.PI * 2
       );
 
       ctx.fill();
-
     }
 
     requestAnimationFrame(
       animate
     );
-
   }
 
   window.addEventListener(
     "resize",
     () => {
+
       resize();
       seed();
+
     },
     {
       passive:true
