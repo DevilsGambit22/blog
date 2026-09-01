@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#160604">
+<title>Devil's Corner</title>
+<style>
+:root{
+  --bg:#090202;
+  --panel:rgba(29,6,4,.48);
+  --panel-2:rgba(15,3,2,.34);
+  --line:rgba(203,69,31,.48);
+  --line-soft:rgba(242,157,65,.18);
+  --red:#ff4a22;
+  --ember:#ff7a32;
+  --gold:#e2b15c;
+  --gold-soft:#f4d28a;
+  --text:#f7ead8;
+  --muted:#d5bda8;
+  --shadow:0 22px 70px rgba(0,0,0,.50);
+}
+
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;
+  min-height:100vh;
+  color:var(--text);
+  font-family:Georgia,"Times New Roman",serif;
+  background:
+    radial-gradient(circle at 50% -10%,rgba(176,42,16,.28),transparent 30%),
+    radial-gradient(circle at 12% 20%,rgba(255,75,24,.10),transparent 28%),
+    linear-gradient(180deg,#170503 0%,#0b0202 46%,#050101 100%);
+  overflow-x:hidden;
+}
+
+body:before{
+  content:"";
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  background:
+    repeating-linear-gradient(
+      90deg,
+      transparent 0 68px,
+      rgba(255,255,255,.012) 69px,
+      transparent 70px 138px
+    );
+  opacity:.35;
+}
+
+.shell{
+  width:min(980px,calc(100% - 24px));
+  margin:22px auto;
+  border:1px solid var(--line);
+  border-radius:28px;
+  background:linear-gradient(180deg,rgba(32,7,5,.50),rgba(7,2,2,.36));
+  box-shadow:var(--shadow),inset 0 1px 0 rgba(255,255,255,.06);
+  backdrop-filter:blur(18px) saturate(120%);
+  -webkit-backdrop-filter:blur(18px) saturate(120%);
+  overflow:hidden;
+}
+
+.hero{
+  position:relative;
+  padding:16px;
+  background:
+    radial-gradient(circle at 50% 0%,rgba(255,90,35,.13),transparent 55%),
+    rgba(8,2,2,.24);
+  border-bottom:1px solid var(--line-soft);
+}
+
+.hero-frame{
+  position:relative;
+  border:1px solid rgba(231,113,51,.44);
+  border-radius:22px;
+  overflow:hidden;
+  background:rgba(0,0,0,.22);
+  box-shadow:0 18px 46px rgba(0,0,0,.36);
+}
+
+.hero-frame img{
+  display:block;
+  width:100%;
+  height:auto;
+}
+
+.hero-overlay{
+  position:absolute;
+  inset:auto 0 0;
+  padding:50px 24px 22px;
+  background:linear-gradient(180deg,transparent,rgba(8,2,2,.88));
+  text-align:center;
+}
+
+.kicker{
+  color:var(--gold-soft);
+  text-transform:uppercase;
+  letter-spacing:.28em;
+  font-size:.76rem;
+  font-weight:700;
+}
+
+.hero-title{
+  margin:7px 0 6px;
+  color:var(--red);
+  font-size:clamp(2rem,7vw,4.5rem);
+  line-height:.92;
+  text-shadow:0 3px 0 #5c1209,0 0 20px rgba(255,65,25,.28);
+}
+
+.hero-sub{
+  margin:0;
+  color:#f6d68f;
+  font-style:italic;
+  font-size:clamp(.95rem,2.2vw,1.2rem);
+}
+
+.content{
+  padding:26px clamp(16px,4vw,38px) 34px;
+}
+
+.intro{
+  max-width:800px;
+  margin:0 auto 24px;
+  padding:20px 21px;
+  border:1px solid var(--line-soft);
+  border-left:4px solid var(--red);
+  border-radius:16px;
+  background:linear-gradient(135deg,rgba(68,14,8,.36),rgba(9,2,2,.22));
+  backdrop-filter:blur(10px);
+  -webkit-backdrop-filter:blur(10px);
+  line-height:1.75;
+  color:#f1dfcc;
+}
+
+.section-title{
+  margin:32px 0 16px;
+  text-align:center;
+  color:var(--gold);
+  font-size:clamp(1.2rem,3vw,1.65rem);
+  letter-spacing:.08em;
+}
+
+.library{
+  height:250px;
+  overflow:hidden;
+  border:1px solid rgba(212,91,42,.38);
+  border-radius:18px;
+  background:rgba(10,2,2,.26);
+  backdrop-filter:blur(12px);
+  -webkit-backdrop-filter:blur(12px);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.04);
+  position:relative;
+}
+
+.library:before,
+.library:after{
+  content:"";
+  position:absolute;
+  left:0; right:0;
+  height:55px;
+  z-index:2;
+  pointer-events:none;
+}
+.library:before{top:0;background:linear-gradient(180deg,rgba(9,2,2,.96),transparent)}
+.library:after{bottom:0;background:linear-gradient(0deg,rgba(9,2,2,.96),transparent)}
+
+.library-track{
+  position:absolute;
+  width:100%;
+  animation:scrollLibrary 22s linear infinite;
+}
+.library:hover .library-track{animation-play-state:paused}
+
+.entry{
+  padding:20px 20px 18px;
+  text-align:center;
+  border-bottom:1px solid rgba(227,133,67,.13);
+}
+.entry strong{
+  display:block;
+  color:#ff7040;
+  font-size:1.06rem;
+  letter-spacing:.08em;
+  margin-bottom:5px;
+}
+.entry span{color:var(--muted);line-height:1.55}
+
+@keyframes scrollLibrary{
+  0%{transform:translateY(250px)}
+  100%{transform:translateY(-100%)}
+}
+
+.cards{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:14px;
+  margin-top:20px;
+}
+.card{
+  min-height:180px;
+  padding:20px;
+  border:1px solid rgba(207,78,34,.32);
+  border-radius:17px;
+  background:linear-gradient(180deg,rgba(48,10,6,.35),rgba(8,2,2,.24));
+  backdrop-filter:blur(12px);
+  -webkit-backdrop-filter:blur(12px);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.035);
+}
+.card h3{
+  margin:0 0 10px;
+  color:#ff6533;
+  font-size:1.02rem;
+}
+.card p{
+  margin:0;
+  color:#ddc8b5;
+  line-height:1.65;
+  font-size:.95rem;
+}
+
+.quote{
+  margin:28px auto 8px;
+  max-width:760px;
+  padding:22px;
+  text-align:center;
+  color:#f3ce7d;
+  font-size:clamp(1rem,2.5vw,1.24rem);
+  line-height:1.6;
+  font-style:italic;
+  border-top:1px solid rgba(213,82,37,.35);
+  border-bottom:1px solid rgba(213,82,37,.35);
+  background:rgba(64,12,6,.16);
+}
+
+.gif-section{
+  margin-top:34px;
+  padding-top:26px;
+  border-top:1px solid rgba(224,116,56,.18);
+  text-align:center;
+}
+.gif-label{
+  color:var(--gold);
+  font-size:.82rem;
+  letter-spacing:.2em;
+  text-transform:uppercase;
+  margin-bottom:12px;
+}
+.gif-glass{
+  width:min(520px,100%);
+  margin:0 auto;
+  padding:12px;
+  border:1px solid rgba(255,101,44,.38);
+  border-radius:24px;
+  background:rgba(14,3,2,.24);
+  box-shadow:0 18px 48px rgba(0,0,0,.34),inset 0 1px 0 rgba(255,255,255,.06);
+  backdrop-filter:blur(12px);
+  -webkit-backdrop-filter:blur(12px);
+}
+.gif-glass img{
+  display:block;
+  width:100%;
+  height:auto;
+  border-radius:17px;
+}
+
+.footer{
+  padding:18px 22px 22px;
+  text-align:center;
+  color:#9f6f54;
+  font-size:.78rem;
+  letter-spacing:.13em;
+  text-transform:uppercase;
+}
+
+
+/* --- Floating glass refinement --- */
+#embers{
+  position:fixed;
+  inset:0;
+  width:100%;
+  height:100%;
+  pointer-events:none;
+  z-index:0;
+  opacity:.82;
+}
+.shell{
+  position:relative;
+  z-index:1;
+  animation:shellFloat 7s ease-in-out infinite;
+  box-shadow:
+    0 30px 85px rgba(0,0,0,.56),
+    0 10px 28px rgba(255,68,24,.08),
+    inset 0 1px 0 rgba(255,255,255,.08);
+}
+.intro,.card,.quote,.gif-glass,.hero-frame{
+  position:relative;
+  transform:translateZ(0);
+  transition:transform .35s ease, box-shadow .35s ease, border-color .35s ease;
+}
+.intro{animation:boardFloatA 6.4s ease-in-out infinite}
+.card:nth-child(1){animation:boardFloatB 6.8s ease-in-out infinite}
+.card:nth-child(2){animation:boardFloatA 7.4s ease-in-out .45s infinite}
+.card:nth-child(3){animation:boardFloatB 6.6s ease-in-out .8s infinite}
+.quote{animation:boardFloatA 7.2s ease-in-out .25s infinite}
+.gif-glass{animation:boardFloatB 6.9s ease-in-out .6s infinite}
+
+.intro:hover,.card:hover,.quote:hover,.gif-glass:hover,.hero-frame:hover{
+  transform:translateY(-5px) scale(1.006);
+  border-color:rgba(255,128,63,.58);
+  box-shadow:
+    0 22px 50px rgba(0,0,0,.42),
+    0 0 30px rgba(255,72,25,.09),
+    inset 0 1px 0 rgba(255,255,255,.09);
+}
+
+@keyframes shellFloat{
+  0%,100%{transform:translateY(0)}
+  50%{transform:translateY(-4px)}
+}
+@keyframes boardFloatA{
+  0%,100%{transform:translateY(0)}
+  50%{transform:translateY(-6px)}
+}
+@keyframes boardFloatB{
+  0%,100%{transform:translateY(-2px)}
+  50%{transform:translateY(5px)}
+}
+@media (prefers-reduced-motion:reduce){
+  .shell,.intro,.card,.quote,.gif-glass{animation:none!important}
+  #embers{display:none}
+}
+
+
+/* --- FREE-FLOATING PANEL LAYOUT --- */
+.shell{
+  width:min(980px,calc(100% - 24px));
+  margin:26px auto 40px;
+  padding:0;
+  border:0 !important;
+  border-radius:0 !important;
+  background:transparent !important;
+  box-shadow:none !important;
+  backdrop-filter:none !important;
+  -webkit-backdrop-filter:none !important;
+  overflow:visible !important;
+  animation:none !important;
+}
+.hero{
+  padding:0;
+  margin:0 0 34px;
+  background:transparent;
+  border:0;
+}
+.content{
+  padding:0;
+  overflow:visible;
+}
+.hero-frame,
+.intro,
+.card,
+.quote,
+.gif-glass{
+  background:linear-gradient(160deg,rgba(34,6,5,.62),rgba(8,2,2,.30));
+  border:1px solid rgba(255,81,39,.48);
+  box-shadow:
+    0 18px 48px rgba(0,0,0,.46),
+    0 0 24px rgba(255,45,20,.08),
+    inset 0 1px 0 rgba(255,255,255,.055);
+  backdrop-filter:blur(13px) saturate(125%);
+  -webkit-backdrop-filter:blur(13px) saturate(125%);
+}
+.hero-frame{animation:floatHero 8.2s ease-in-out infinite}
+.intro{margin:0 auto 34px;animation:floatOne 6.8s ease-in-out infinite}
+.cards{gap:22px;margin:0 0 36px}
+.card:nth-child(1){animation:floatTwo 7.1s ease-in-out -.9s infinite}
+.card:nth-child(2){animation:floatThree 7.7s ease-in-out -2.1s infinite}
+.card:nth-child(3){animation:floatOne 6.9s ease-in-out -3s infinite}
+.quote{
+  margin:0 auto 38px;
+  border:1px solid rgba(255,81,39,.42);
+  border-radius:18px;
+  background:linear-gradient(160deg,rgba(50,9,6,.52),rgba(8,2,2,.25));
+  animation:floatTwo 7.6s ease-in-out -1.5s infinite;
+}
+.gif-section{
+  margin:0;
+  padding:0;
+  border:0;
+}
+.gif-glass{animation:floatThree 7.4s ease-in-out -2.6s infinite}
+.footer{padding-top:32px}
+
+@keyframes floatHero{
+  0%,100%{transform:translate3d(0,0,0) rotate(-.12deg)}
+  50%{transform:translate3d(0,-7px,0) rotate(.12deg)}
+}
+@keyframes floatOne{
+  0%,100%{transform:translate3d(0,0,0) rotate(-.18deg)}
+  50%{transform:translate3d(0,-8px,0) rotate(.14deg)}
+}
+@keyframes floatTwo{
+  0%,100%{transform:translate3d(0,-2px,0) rotate(.16deg)}
+  50%{transform:translate3d(0,7px,0) rotate(-.13deg)}
+}
+@keyframes floatThree{
+  0%,100%{transform:translate3d(0,3px,0) rotate(-.12deg)}
+  50%{transform:translate3d(0,-6px,0) rotate(.18deg)}
+}
+#embers{opacity:1}
+@media (prefers-reduced-motion:reduce){
+  .hero-frame,.intro,.card,.quote,.gif-glass{animation:none!important}
+}
+
+@media(max-width:720px){
+  .shell{width:min(100% - 14px,980px);margin:12px auto 28px;border:0;border-radius:0;background:transparent;box-shadow:none}
+  .hero{padding:8px}
+  .hero-frame{border-radius:16px}
+  .hero-overlay{padding:40px 12px 14px}
+  .cards{grid-template-columns:1fr}
+  .content{padding-left:14px;padding-right:14px}
+  .library{height:230px}
+}
+</style>
+</head>
+<body>
+<canvas id="embers" aria-hidden="true"></canvas>
+
+<main class="shell">
+
+  <section class="hero">
+    <div class="hero-frame">
+      <img src="devils-corner-hero.jpg" alt="Devil's Corner hero artwork">
+      <div class="hero-overlay">
+        <div class="kicker">Literature • Strategy • Chess</div>
+        <h1 class="hero-title">DEVIL'S CORNER</h1>
+        <p class="hero-sub">Where strategy, story, and the human game meet.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="content">
+
+    <div class="intro">
+      <strong style="color:#ff7a3a;">🔥 Welcome to Devil's Corner.</strong>
+      <br><br>
+      Devil's Corner is an original chess blog devoted to the ideas that make the game worth studying long after the pieces leave the board. Here, chess meets literature, history, psychology, strategy, and the enduring questions of leadership, character, ambition, sacrifice, and consequence.
+      <br><br>
+      Classic literature offers a natural companion to chess. Its greatest characters face uncertainty, calculate risk, pursue difficult objectives, misjudge their opponents, and live with the consequences of their decisions. Devil's Corner brings those themes to the sixty-four squares, using stories and ideas to illuminate the human side of strategy without losing sight of the game itself.
+      <br><br>
+      Alongside literary analysis, the blog features thoughtful chess commentary, strategic discussion, community perspectives, and original essays written for players who enjoy asking not only <em>what</em> the best move is, but <em>why</em> a decision matters.
+      <br><br>
+      <strong style="color:#f4d28a;">Chess is the board. Ideas are the battleground.</strong>
+    </div>
+
+    <div class="cards">
+      <article class="card">
+        <h3>📖 Chess & Literature</h3>
+        <p>Classic stories and enduring ideas viewed through the logic of the chessboard—where character, conflict, foresight, and consequence become part of strategic thought.</p>
+      </article>
+
+      <article class="card">
+        <h3>♟ Strategy & Ideas</h3>
+        <p>Thoughtful analysis of planning, psychology, sacrifice, decision-making, and the deeper principles that shape how chess is played and understood.</p>
+      </article>
+
+      <article class="card">
+        <h3>🔥 Essays & Commentary</h3>
+        <p>Original perspectives on chess culture, players, communities, competition, and the stories that give the game meaning beyond wins and losses.</p>
+      </article>
+    </div>
+
+    <div class="quote">
+      “The board gives us sixty-four squares.<br>
+      The ideas behind them are limitless.”
+    </div>
+
+    <section class="gif-section">
+      <div class="gif-label">One More Move. One More Idea.</div>
+      <div class="gif-glass">
+        <img src="devils-gambit.gif" alt="Animated Devil's Corner mascot">
+      </div>
+    </section>
+
+  </section>
+
+  <footer class="footer">
+    Devil's Corner • Chess • Literature • Strategy
+  </footer>
+
+</main>
+
+
+<script>
+(() => {
+  const canvas = document.getElementById('embers');
+  const ctx = canvas.getContext('2d');
+  let w=0,h=0,dpr=1,embers=[];
+  const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  function resize(){
+    dpr=Math.min(devicePixelRatio||1,2);
+    w=innerWidth; h=innerHeight;
+    canvas.width=w*dpr; canvas.height=h*dpr;
+    canvas.style.width=w+'px'; canvas.style.height=h+'px';
+    ctx.setTransform(dpr,0,0,dpr,0,0);
+  }
+  function make(reset=false){
+    return {
+      x:Math.random()*w,
+      y:reset ? h+Math.random()*80 : Math.random()*h,
+      r:.6+Math.random()*2.1,
+      vy:.38+Math.random()*1.05,
+      vx:(Math.random()-.5)*.28,
+      a:.18+Math.random()*.62,
+      life:.55+Math.random()*.45,
+      flick:Math.random()*Math.PI*2
+    };
+  }
+  function seed(){
+    const n=Math.min(96,Math.max(42,Math.floor(w/14)));
+    embers=Array.from({length:n},()=>make(false));
+  }
+  function draw(t){
+    if(reduced) return;
+    ctx.clearRect(0,0,w,h);
+    for(let i=0;i<embers.length;i++){
+      const e=embers[i];
+      e.y-=e.vy; e.x+=e.vx+Math.sin(t*.0015+e.flick)*.12;
+      if(e.y<-20 || e.x<-20 || e.x>w+20) embers[i]=Object.assign(e,make(true));
+      const flicker=.68+.32*Math.sin(t*.006+e.flick);
+      const alpha=e.a*flicker;
+      const g=ctx.createRadialGradient(e.x,e.y,0,e.x,e.y,e.r*4.2);
+      g.addColorStop(0,`rgba(255,120,70,${Math.min(1,alpha*1.15)})`);
+      g.addColorStop(.24,`rgba(255,45,18,${alpha})`);
+      g.addColorStop(1,'rgba(170,0,0,0)');
+      ctx.fillStyle=g;
+      ctx.beginPath();
+      ctx.arc(e.x,e.y,e.r*4.2,0,Math.PI*2);
+      ctx.fill();
+    }
+    requestAnimationFrame(draw);
+  }
+  addEventListener('resize',()=>{resize();seed()},{passive:true});
+  resize(); seed(); requestAnimationFrame(draw);
+})();
+</script>
+
+</body>
+</html>
